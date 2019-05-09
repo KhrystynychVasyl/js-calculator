@@ -18,7 +18,8 @@ function repl(value) {
 }
 
 function deleteLastZeros(value) {
-    while (value.slice(-1)=='0') value = value.slice(0,-1)
+    while (value.slice(-1)=='0') value = value.slice(0,-1);
+    if (value.slice(-1)=='.') value = value.slice(0,-1);
     return value;
 }
 
@@ -100,7 +101,7 @@ const setButton = {
 
 function setMemValue(num) {
     var memCellCheck = document.querySelector('input[name = "cellNumber"]:checked').value;
-    num !== '' ? setButton[memCellCheck].value = eval(num) : setButton[memCellCheck].value = num;
+    num !== '' ? setButton[memCellCheck].value = deleteLastZeros(eval(num).toFixed(4)) : setButton[memCellCheck].value = num;
 }
 
 function getMemValue() {
@@ -201,12 +202,12 @@ function equalPressed(e) {
     }
     else if (display.value !== '' && displaySum.value !== '') {
         displaySum.value = repl(displaySum.value + display.value);
-        display.value = deleteLastZeros(eval(displaySum.value).toFixed(6));
+        display.value = deleteLastZeros(eval(displaySum.value).toFixed(4));
         displaySum.value = '';
     }
     else if (display.value == '' && displaySum.value !== '') {
         displaySum.value = displaySum.value.split('').filter((val, ind, arr) => ind < arr.length - 1).join('');
-        display.value = deleteLastZeros(eval(displaySum.value).toFixed(6));
+        display.value = deleteLastZeros(eval(displaySum.value).toFixed(4));
         displaySum.value = '';
     }
 }
