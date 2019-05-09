@@ -1,8 +1,8 @@
 const display = document.querySelector('.display');
 const displaySum = document.querySelector('.displaySum');
 
-function repl(abs) {
-    abs = abs.replace(/\+\+|\+\-|\-\+|\-\-/g, function(c) {
+function repl(value) {
+    value = value.replace(/\+\+|\+\-|\-\+|\-\-/g, function(c) {
         switch (c) {
             case "++":
                 return "+";
@@ -14,7 +14,12 @@ function repl(abs) {
                 return "+";
         }
     })
-    return abs;
+    return value;
+}
+
+function deleteLastZeros(value) {
+    while (value.slice(-1)=='0') value = value.slice(0,-1)
+    return value;
 }
 
 function divisionByZero() {
@@ -80,39 +85,10 @@ function operPressed(e) {
 }
 
 const firstCellMem = document.querySelector('.firstCell');
-firstCellMem.addEventListener('click', firstCellMemPressed);
-
-function firstCellMemPressed(e) {
-    e.preventDefault();
-}
-
 const secondCellMem = document.querySelector('.secondCell');
-secondCellMem.addEventListener('click', secondCellMemPressed);
-
-function secondCellMemPressed(e) {
-    e.preventDefault();
-}
-
 const thirdCellMem = document.querySelector('.thirdCell');
-thirdCellMem.addEventListener('click', thirdCellMemPressed);
-
-function thirdCellMemPressed(e) {
-    e.preventDefault();
-}
-
 const fourthCellMem = document.querySelector('.fourthCell');
-fourthCellMem.addEventListener('click', fourthCellMemPressed);
-
-function fourthCellMemPressed(e) {
-    e.preventDefault();
-}
-
 const fifthCellMem = document.querySelector('.fifthCell');
-fifthCellMem.addEventListener('click', fifthCellMemPressed);
-
-function fifthCellMemPressed(e) {
-    e.preventDefault();
-}
 
 const setButton = {
     'firstCell': firstCellMem,
@@ -124,12 +100,12 @@ const setButton = {
 
 function setMemValue(num) {
     var memCellCheck = document.querySelector('input[name = "cellNumber"]:checked').value;
-    setButton[memCellCheck].innerText = num;
+    num !== '' ? setButton[memCellCheck].value = eval(num) : setButton[memCellCheck].value = num;
 }
 
 function getMemValue() {
     var memCellCheck = document.querySelector('input[name = "cellNumber"]:checked').value;
-    return setButton[memCellCheck].innerText;
+    return setButton[memCellCheck].value;
 }
 
 const memSubtract = document.querySelector('.memSubtract');
@@ -141,12 +117,12 @@ function memSubtractPressed(e) {
         divisionByZero();
     }
     else if (display.value == '' && displaySum.value !== '') {
-        let a = displaySum.value.split('').filter((val, ind, arr) => ind < arr.length - 1).join('');
-        getMemValue() == 'Is Empty' ? setMemValue(0 - eval(a)) : setMemValue(getMemValue() - eval(a));
+        let displaySumValue = displaySum.value.split('').filter((val, ind, arr) => ind < arr.length - 1).join('');
+        getMemValue() == '' ? setMemValue(0 - eval(displaySumValue)) : setMemValue(getMemValue() - eval(displaySumValue));
     }
     else if (display.value !== '') {
-        let a = displaySum.value + display.value;
-        getMemValue() == 'Is Empty' ? setMemValue(0 - eval(a)) : setMemValue(getMemValue() - eval(a));
+        let displaySumValue = displaySum.value + display.value;
+        getMemValue() == '' ? setMemValue(0 - eval(displaySumValue)) : setMemValue(getMemValue() - eval(displaySumValue));
     }
 }
 
@@ -159,12 +135,12 @@ function memAddPressed(e) {
         divisionByZero();
     }
     else if (display.value == '' && displaySum.value !== '') {
-        let a = displaySum.value.split('').filter((val, ind, arr) => ind < arr.length - 1).join('');
-        getMemValue() == 'Is Empty' ? setMemValue(0 + eval(a)) : setMemValue(eval(getMemValue()) + eval(a));
+        let displaySumValue = displaySum.value.split('').filter((val, ind, arr) => ind < arr.length - 1).join('');
+        getMemValue() == '' ? setMemValue(0 + eval(displaySumValue)) : setMemValue(eval(getMemValue()) + eval(displaySumValue));
     }
     else if (display.value !== '') {
-        let a = displaySum.value + display.value;
-        getMemValue() == 'Is Empty' ? setMemValue(0 + eval(a)) : setMemValue(eval(getMemValue()) + eval(a));
+        let displaySumValue = displaySum.value + display.value;
+        getMemValue() == '' ? setMemValue(0 + eval(displaySumValue)) : setMemValue(eval(getMemValue()) + eval(displaySumValue));
     }
 }
 
@@ -174,12 +150,12 @@ memSet.addEventListener('click', memSetPressed);
 function memSetPressed(e) {
     e.preventDefault();
     if (display.value == '' && displaySum.value !== '') {
-        let a = displaySum.value.split('').filter((val, ind, arr) => ind < arr.length - 1).join('');
-        setMemValue(eval(a));
+        let displaySumValue = displaySum.value.split('').filter((val, ind, arr) => ind < arr.length - 1).join('');
+        setMemValue(eval(displaySumValue));
     }
     else if (display.value !== '') {
-        let a = repl(displaySum.value + display.value);
-        setMemValue(eval(a));
+        let displaySumValue = repl(displaySum.value + display.value);
+        setMemValue(eval(displaySumValue));
     }
 }
 
@@ -188,7 +164,7 @@ memDisp.addEventListener('click', memDispPressed);
 
 function memDispPressed(e) {
     e.preventDefault();
-    getMemValue() == 'Is Empty' ? '' : display.value = getMemValue();
+    getMemValue() == '' ? '' : display.value = getMemValue();
 }
 
 const memClear = document.querySelector('.memClear');
@@ -196,7 +172,7 @@ memClear.addEventListener('click', memClearPressed);
 
 function memClearPressed(e) {
     e.preventDefault();
-    setMemValue('Is Empty');
+    setMemValue('');
 }
 
 const dispClear = document.querySelector('.dispClear');
@@ -225,12 +201,12 @@ function equalPressed(e) {
     }
     else if (display.value !== '' && displaySum.value !== '') {
         displaySum.value = repl(displaySum.value + display.value);
-        display.value = eval(displaySum.value);
+        display.value = deleteLastZeros(eval(displaySum.value).toFixed(6));
         displaySum.value = '';
     }
     else if (display.value == '' && displaySum.value !== '') {
         displaySum.value = displaySum.value.split('').filter((val, ind, arr) => ind < arr.length - 1).join('');
-        display.value = eval(displaySum.value);
+        display.value = deleteLastZeros(eval(displaySum.value).toFixed(6));
         displaySum.value = '';
     }
 }
