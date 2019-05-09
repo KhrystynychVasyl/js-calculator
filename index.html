@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>calculator</title>
+    <link rel="stylesheet" href="css/index.css" />
+</head>
+
+<body>
+
+    <form class="calc">
+        <div class="mainView">
+            <div class="memBlock">
+                <div class="memCell">
+                    <button class="firstCell">Is Empty</button>
+                    <input type="radio" name="cellNumber" value="firstCell" checked>
+                    <br>
+                    <button class="secondCell">Is Empty</button>
+                    <input type="radio" name="cellNumber" value="secondCell">
+                    <br>
+                    <button class="thirdCell">Is Empty</button>
+                    <input type="radio" name="cellNumber" value="thirdCell">
+                    <br>
+                    <button class="fourthCell">Is Empty</button>
+                    <input type="radio" name="cellNumber" value="fourthCell">
+                    <br>
+                    <button class="fifthCell">Is Empty</button>
+                    <input type="radio" name="cellNumber" value="fifthCell">
+                    <br>
+                </div>
+                <div class="memActionButton">
+                    <button class="memClear">MC</button>
+                    <button class="memDisp">MR</button>
+                    <button class="memSet">MS</button>
+                    <button class="memAdd">M+</button>
+                    <button class="memSubtract">M-</button>
+                </div>
+            </div>
+            <div>
+                <div class="displayBlock">
+                    <input type="text" class="displaySum" placeholder="0" size="22" readonly>
+                    <input type="text" class="display" placeholder="0" size="22" readonly>
+                </div>
+                <div class="numberBlock">
+                    <div class="numberBlockFirst">
+                        <button class="dispClear">C</button>
+                        <button class="dispClearLast">CE</button>
+                        <button class="equal">=</button>
+                    </div><br>
+                    <div class="opers numberBlockSecond">
+                        <button>+</button>
+                        <button>-</button>
+                        <button>*</button>
+                        <button>/</button>
+                    </div>
+                    <div class="numberBlockThird">
+                        <div class="digits">
+                            <button>7</button>
+                            <button>8</button>
+                            <button>9</button><br>
+                            <button>4</button>
+                            <button>5</button>
+                            <button>6</button><br>
+                            <button>1</button>
+                            <button>2</button>
+                            <button>3</button>
+                        </div><br>
+                        <div>
+                            <button class="dotButton">.</button>
+                            <button class="zeroButton">0</button>
+                            <button class="plus-minus">+/-</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="js/index.js"></script>
+</body>
+
+</html>

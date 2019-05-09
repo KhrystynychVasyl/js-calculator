@@ -1,0 +1,85 @@
+body {
+    max-width: 800px;
+    min-width: 260px;
+    margin: auto;
+
+}
+
+.memBlock {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column-reverse;
+}
+
+.memCell {
+    width: 216px;
+    height: 125px;
+    border: solid 2px gray;
+
+}
+
+.memActionButton {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+    width: 216px;
+    height: 46px;
+    border: solid 2px gray;
+}
+
+.mainView {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+@media (max-width: 440px) {
+    .mainView {
+        flex-direction: column;
+    }
+    .memBlock {
+    flex-direction: column;
+}
+    
+    
+
+}
+
+.numberBlock {
+    height: 125px;
+    border: solid 2px gray;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row-reverse;
+}
+
+.numberBlockFirst {
+    height: 110px;
+    display: flex;
+    align-content: center;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+.numberBlockSecond {
+    height: 110px;
+    display: flex;
+    align-content: center;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+.displayBlock {
+    width: 216px;
+    height: 46px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: auto;
+    border: solid 2px gray;
+}
