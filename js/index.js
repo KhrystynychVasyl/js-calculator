@@ -65,12 +65,13 @@ opers.forEach(btn => btn.addEventListener('click', operPressed));
 
 function operPressed(e) {
     e.preventDefault();
-    if (display.value !== '') {
+    if (eval(display.value) == 0 && /\//.test(displaySum.value.charAt(displaySum.value.length - 1))) {
+        divisionByZero();
+
+    }
+    else if (display.value !== '') {
         displaySum.value = repl(displaySum.value + display.value + e.target.innerText);
         display.value = '';
-    }
-    else if (eval(display.value) == 0 && /\//.test(displaySum.value.charAt(displaySum.value.length - 1))) {
-        divisionByZero();
     }
     else if (display.value === '' && displaySum.value !== '') {
         displaySum.value = displaySum.value.split('').filter((val, ind, arr) => ind < arr.length - 1).join('') + e.target.innerText;
@@ -219,13 +220,13 @@ document.querySelector('.equal').addEventListener('click', equalPressed);
 
 function equalPressed(e) {
     e.preventDefault();
-    if (display.value !== '' && displaySum.value !== '') {
+    if (eval(display.value) == 0 && /\//.test(displaySum.value.charAt(displaySum.value.length - 1))) {
+        divisionByZero();
+    }
+    else if (display.value !== '' && displaySum.value !== '') {
         displaySum.value = repl(displaySum.value + display.value);
         display.value = eval(displaySum.value);
         displaySum.value = '';
-    }
-    else if (eval(display.value) == 0 && /\//.test(displaySum.value.charAt(displaySum.value.length - 1))) {
-        divisionByZero();
     }
     else if (display.value == '' && displaySum.value !== '') {
         displaySum.value = displaySum.value.split('').filter((val, ind, arr) => ind < arr.length - 1).join('');
